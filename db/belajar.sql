@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.1
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 08, 2018 at 08:25 AM
--- Server version: 10.1.33-MariaDB
--- PHP Version: 7.2.6
+-- Host: 127.0.0.1
+-- Generation Time: Jul 10, 2019 at 05:27 AM
+-- Server version: 10.1.28-MariaDB
+-- PHP Version: 5.6.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -30,8 +30,17 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `table_makul` (
   `id` int(11) NOT NULL,
-  `makul` varchar(10) DEFAULT NULL
+  `makul` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_makul`
+--
+
+INSERT INTO `table_makul` (`id`, `makul`) VALUES
+(1, 'Pemrograman Web'),
+(3, 'Basis Data 1'),
+(4, 'Basis Data 2');
 
 -- --------------------------------------------------------
 
@@ -52,7 +61,7 @@ CREATE TABLE `table_profile` (
 --
 
 INSERT INTO `table_profile` (`id`, `namaLengkap`, `alamat`, `umur`, `jk`) VALUES
-(1, 'Complete Name 0', 'Alamat 0', 20, 'Pria'),
+(1, 'Fajar Ardiansyah', 'Jakarta', 20, 'Pria'),
 (3, 'Complete Name 1', 'Alamat 1', 20, 'Pria'),
 (4, 'Complete Name 2', 'Alamat 2', 20, 'Pria');
 
@@ -141,13 +150,13 @@ ALTER TABLE `table_user`
 -- AUTO_INCREMENT for table `table_makul`
 --
 ALTER TABLE `table_makul`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `table_profile`
 --
 ALTER TABLE `table_profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `table_students`
@@ -159,7 +168,7 @@ ALTER TABLE `table_students`
 -- AUTO_INCREMENT for table `table_user`
 --
 ALTER TABLE `table_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

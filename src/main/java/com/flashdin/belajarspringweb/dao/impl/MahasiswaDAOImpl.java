@@ -5,8 +5,9 @@
  */
 package com.flashdin.belajarspringweb.dao.impl;
 
-import com.flashdin.belajarspringweb.dao.MakulDAO;
-import com.flashdin.belajarspringweb.entity.Makul;
+import com.flashdin.belajarspringweb.dao.MahasiswaDAO;
+import com.flashdin.belajarspringweb.entity.Mahasiswa;
+import com.flashdin.belajarspringweb.entity.MataKuliah;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
@@ -22,24 +23,27 @@ import org.springframework.stereotype.Repository;
  * @author Fajar
  */
 @Repository
-public class MakulDAOImpl implements MakulDAO{
+public class MahasiswaDAOImpl implements MahasiswaDAO{
     
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Makul> findByName(Makul param) {
-        String sql = "select * from table_makul where makul like ?";
-        return jdbcTemplate.query(sql, new Object[]{"%" + param.getMakul() + "%"}, new BeanPropertyRowMapper<>(Makul.class));
+    public List<Mahasiswa> findByName(Mahasiswa param) {
+        String sql = "select * from table_mahasiswa where nama like ?";
+        return jdbcTemplate.query(sql, new Object[]{"%" + param.getNama()+ "%"}, new BeanPropertyRowMapper<>(Mahasiswa.class));
     }
 
     @Override
-    public Makul save(Makul param) {
-        String sql = "insert into table_makul (makul) values (?)";
+    public Mahasiswa save(Mahasiswa param) {
+        String sql = "insert into table_mahasiswa (nama,alamat,no_telepon,sks) values (?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, param.getMakul());
+            ps.setString(1, param.getNama());
+            ps.setString(2, param.getAlamat());
+            ps.setInt(3, param.getNo_telepon());
+            ps.setInt(4, param.getSks());
             return ps;
         }, keyHolder);
         param.setId(keyHolder.getKey().intValue());
@@ -47,12 +51,15 @@ public class MakulDAOImpl implements MakulDAO{
     }
 
     @Override
-    public Makul update(Makul param) {
-        String sql = "update table_makul set makul=? where id=?";
+    public Mahasiswa update(Mahasiswa param) {
+        String sql = "update table_mahasiswa set nama=?, alamat=?, no_telepon=?, sks=? where id=?";
         int rtn = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, param.getMakul());
-            ps.setInt(2, param.getId());
+            ps.setString(1, param.getNama());
+            ps.setString(2, param.getAlamat());
+            ps.setInt(3, param.getNo_telepon());
+            ps.setInt(4, param.getSks());
+            ps.setInt(5, param.getId());
             return ps;
         });
         param.setId(rtn);
@@ -60,8 +67,8 @@ public class MakulDAOImpl implements MakulDAO{
     }
 
     @Override
-    public int delete(Makul param) {
-        String sql = "delete from table_makul where id=?";
+    public int delete(Mahasiswa param) {
+        String sql = "delete from table_mahasiswa where id=?";
         int rtn = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, param.getId());
@@ -71,14 +78,15 @@ public class MakulDAOImpl implements MakulDAO{
     }
 
     @Override
-    public Makul findById(int id) {
-        String sql = "select * from table_makul where id=?";
-        return jdbcTemplate.queryForObject(sql, new Object[] {id}, new BeanPropertyRowMapper<>(Makul.class));
+    public Mahasiswa findById(int id) {
+        String sql = "select * from table_mahasiswa where id=?";
+        return jdbcTemplate.queryForObject(sql, new Object[] {id}, new BeanPropertyRowMapper<>(Mahasiswa.class));
     }
 
     @Override
-    public List<Makul> findAll() {
-        String sql = "select * from table_makul";
-        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Makul.class));
+    public List<Mahasiswa> findAll() {
+        String sql = "select * from table_mahasiswa";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Mahasiswa.class));
     }
+    
 }

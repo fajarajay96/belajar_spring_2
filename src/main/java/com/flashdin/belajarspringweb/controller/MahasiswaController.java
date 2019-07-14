@@ -5,10 +5,8 @@
  */
 package com.flashdin.belajarspringweb.controller;
 
-import com.flashdin.belajarspringweb.entity.Makul;
-import com.flashdin.belajarspringweb.entity.Profile;
-import com.flashdin.belajarspringweb.entity.User;
-import com.flashdin.belajarspringweb.service.MakulService;
+import com.flashdin.belajarspringweb.entity.Mahasiswa;
+import com.flashdin.belajarspringweb.service.MahasiswaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,65 +23,65 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @author Fajar
  */
 @Controller
-@RequestMapping("/makul")
-public class MakulController {
-    
+@RequestMapping("/mahasiswa")
+public class MahasiswaController {
+
     @Autowired
-    private MakulService makulService;
-    
+    private MahasiswaService mahasiswaService;
+
     @GetMapping(path = "")
     public String viewData(Model model, @RequestParam(value = "search", required = false) String param,
-                           @RequestParam(value = "filter", required = false) String param1) {
+            @RequestParam(value = "filter", required = false) String param1) {
         if (param == null && param1 == null) {
-            model.addAttribute("dataSets", makulService.findAll());
+            model.addAttribute("dataSets", mahasiswaService.findAll());
         } else {
-            Makul makul = new Makul();
-            makul.setMakul(param);
-            model.addAttribute("dataSets", makulService.findByName(makul));
+            Mahasiswa mahasiswa = new Mahasiswa();
+            mahasiswa.setNama(param);
+            model.addAttribute("dataSets", mahasiswaService.findByName(mahasiswa));
         }
-        return "/makul/list";
+        return "/mahasiswa/list";
     }
-    
+
     @GetMapping(path = "/create")
     public String viewCreate(Model model) {
-        model.addAttribute("dataSets", new Makul());
-        return "/makul/create";
+        model.addAttribute("dataSets", new Mahasiswa());
+        return "/mahasiswa/create";
     }
-    
+
     @GetMapping(path = "/update/{id}")
     public String viewUpdate(Model model, @PathVariable(value = "id") int id) {
-        model.addAttribute("dataSets", makulService.findById(id));
-        return "/makul/update";
+        model.addAttribute("dataSets", mahasiswaService.findById(id));
+        return "/mahasiswa/update";
     }
-    
+
     @PostMapping(value = "/create")
-    public String save(Makul param) {
-        Makul data = makulService.save(param);
+    public String save(Mahasiswa param) {
+        Mahasiswa data = mahasiswaService.save(param);
         if (data.getId() == 0) {
-            return "redirect:/makul/create?failed";
+            return "redirect:/mahasiswa/create?failed";
         } else {
-            return "redirect:/makul/create?success";
+            return "redirect:/mahasiswa/create?success";
         }
     }
-    
+
     @PutMapping(path = "/update")
-    public String update(Makul param) {
-        Makul data = makulService.update(param);
+    public String update(Mahasiswa param) {
+        Mahasiswa data = mahasiswaService.update(param);
         if (data.getId() == 0) {
-            return "redirect:/makul?ufailed";
+            return "redirect:/mahasiswa?ufailed";
         } else {
-            return "redirect:/makul?usuccess";
+            return "redirect:/mahasiswa?usuccess";
         }
     }
-    
+
     @DeleteMapping(path = "/delete")
-    public String delete(Makul param) {
-        int data = makulService.delete(param);
+    public String delete(Mahasiswa param) {
+        int data = mahasiswaService.delete(param);
         if (data == 0) {
-            return "redirect:/makul?dfailed";
+            return "redirect:/mahasiswa?dfailed";
         } else {
-            return "redirect:/makul?dsuccess";
+            return "redirect:/mahasiswa?dsuccess";
         }
     }
-    
+
 }

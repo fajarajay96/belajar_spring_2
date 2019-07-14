@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.flashdin.belajarspringweb.service;
+package com.flashdin.belajarspringweb.dao;
 
-import com.flashdin.belajarspringweb.entity.Makul;
+import com.flashdin.belajarspringweb.entity.Mahasiswa;
 import java.util.List;
 
 /**
  *
  * @author Fajar
  */
-public interface MakulService extends BaseService<Makul>{
-    List<Makul> findByName(Makul param);
+public interface MahasiswaDAO extends BaseDAO<Mahasiswa>{
+    List<Mahasiswa> findByName(Mahasiswa param);
 }

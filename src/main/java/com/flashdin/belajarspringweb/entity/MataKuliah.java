@@ -9,9 +9,26 @@ package com.flashdin.belajarspringweb.entity;
  *
  * @author Fajar
  */
-public class Makul {
+public class MataKuliah {
     protected int id;
-    private String makul;
+    private String mataKuliah;
+    private int sks;
+
+    public int getSks() {
+        return sks;
+    }
+
+    public void setSks(int sks) {
+        this.sks = sks;
+    }
+
+    public String getMataKuliah() {
+        return mataKuliah;
+    }
+
+    public void setMataKuliah(String mataKuliah) {
+        this.mataKuliah = mataKuliah;
+    }
 
     public int getId() {
         return id;
@@ -21,12 +38,4 @@ public class Makul {
         this.id = id;
     }
 
-    public String getMakul() {
-        return makul;
-    }
-
-    public void setMakul(String makul) {
-        this.makul = makul;
-    }
-    
 }

@@ -174,7 +174,7 @@
     <div class="container-fluid">
         <ul class="nav navbar-nav">
             <li><a th:href="@{/}">Home</a></li>
-            <li class="active"><a th:href="@{/makul}">Mata Kuliah</a></li>
+            <li class="active"><a th:href="@{/mataKuliah}">Mata Kuliah</a></li>
         </ul>
     </div>
 </nav>
@@ -210,14 +210,14 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col col-md-12">
-                        <button class="btn btn-primary" onclick="window.location.href='/makul/create';"><span
+                        <button class="btn btn-primary" onclick="window.location.href='/mataKuliah/create';"><span
                                 class="fa fa-plus"></span>
                         </button>
-                        <button class="btn btn-default" onclick="window.location.href='/makul';"><span
+                        <button class="btn btn-default" onclick="window.location.href='/mataKuliah';"><span
                                 class="fa fa-refresh"></span>
                         </button>
                         <div class="input-group" id="adv-search">
-                            <form th:id="form-search" th:action="@{/makul}"
+                            <form th:id="form-search" th:action="@{/mataKuliah}"
                                   th:method="get">
                                 <input class="form-control" type="text" id="search" name="search"
                                        th:value="${param.search}"
@@ -231,12 +231,12 @@
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right" role="menu">
                                             <form th:id="form-search" class="form-horizontal" role="form"
-                                                  th:action="@{/makul}"
+                                                  th:action="@{/mataKuliah}"
                                                   th:method="get">
                                                 <div class="form-group">
                                                     <label for="filter">Filter :</label>
                                                     <select class="form-control" id="filter" name="filter">
-                                                        <option value="makul" selected="">Mata Kuliah
+                                                        <option value="mataKuliah" selected="">Mata Kuliah
                                                         </option>
                                                     </select>
                                                 </div>
@@ -260,14 +260,16 @@
                     <thead>
                     <tr>
                         <th>Mata Kuliah</th>
+                        <th>SKS</th>
                         <th class="text-center"><em class="fa fa-cog"></em></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="data : ${dataSets}">
-                        <td th:text="${data.makul}"></td>
+                        <td th:text="${data.mataKuliah}"></td>
+                        <td th:text="${data.sks}"></td>
                         <td align="center">
-                            <a th:href="${'makul/update/' + data.id}" class="btn btn-warning"><i
+                            <a th:href="${'mataKuliah/update/' + data.id}" class="btn btn-warning"><i
                                     class="fa fa-pencil"></i></a>
                             <a href="#" class="delete-modal btn btn-danger"
                                th:data-value="${data.id}"
@@ -296,7 +298,7 @@
                     <p>Aksi ini tidak dapat di ulang.</p>
                 </div>
                 <div class="modal-footer">
-                    <form th:action="@{/makul/delete}" th:method="delete">
+                    <form th:action="@{/mataKuliah/delete}" th:method="delete">
                         <input type="hidden" th:id="id" th:name="id">
                         <button type="submit" class="btn btn-danger" name="task_del">Hapus</button>
                     </form>
