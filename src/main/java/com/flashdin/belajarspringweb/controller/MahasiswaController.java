@@ -7,6 +7,7 @@ package com.flashdin.belajarspringweb.controller;
 
 import com.flashdin.belajarspringweb.entity.Mahasiswa;
 import com.flashdin.belajarspringweb.service.MahasiswaService;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +35,7 @@ public class MahasiswaController {
             @RequestParam(value = "filter", required = false) String param1) {
         if (param == null && param1 == null) {
             model.addAttribute("dataSets", mahasiswaService.findAll());
+            
         } else {
             Mahasiswa mahasiswa = new Mahasiswa();
             mahasiswa.setNama(param);

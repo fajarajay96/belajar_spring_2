@@ -5,6 +5,8 @@
  */
 package com.flashdin.belajarspringweb.entity;
 
+import java.util.List;
+
 /**
  *
  * @author Fajar
@@ -16,6 +18,15 @@ public class Mahasiswa {
     private String alamat;
     private int no_telepon;
     private int sks;
+    private List<Krs> listKrs;
+
+    public List<Krs> getListKrs() {
+        return listKrs;
+    }
+
+    public void setListKrs(List<Krs> listKrs) {
+        this.listKrs = listKrs;
+    }
 
     public int getId() {
         return id;

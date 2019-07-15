@@ -5,11 +5,14 @@
  */
 package com.flashdin.belajarspringweb.entity;
 
+import java.util.List;
+
 /**
  *
  * @author Fajar
  */
 public class Krs {
+    
     
     protected int id;
     private int id_mahasiswa;
@@ -17,7 +20,17 @@ public class Krs {
     private int id_matakuliah;
     private String matakuliah;
     private int sks;
+    private Mahasiswa mahasiswa;
 
+    
+    public Mahasiswa getMahasiswa() {
+        return mahasiswa;
+    }
+
+    public void setMahasiswa(Mahasiswa mahasiswa) {
+        this.mahasiswa = mahasiswa;
+    }
+    
     public int getId() {
         return id;
     }

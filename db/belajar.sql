@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 10, 2019 at 05:27 AM
+-- Generation Time: Jul 15, 2019 at 06:13 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -25,22 +25,58 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `table_krs`
+--
+
+CREATE TABLE `table_krs` (
+  `id` int(10) NOT NULL,
+  `id_mahasiswa` int(10) NOT NULL,
+  `id_matakuliah` int(11) NOT NULL,
+  `sks` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `table_mahasiswa`
+--
+
+CREATE TABLE `table_mahasiswa` (
+  `id` int(10) NOT NULL,
+  `nama` varchar(40) NOT NULL,
+  `alamat` text NOT NULL,
+  `no_telepon` int(15) NOT NULL,
+  `sks` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_mahasiswa`
+--
+
+INSERT INTO `table_mahasiswa` (`id`, `nama`, `alamat`, `no_telepon`, `sks`) VALUES
+(2, 'Fajar', 'Jakarta', 99, 21),
+(3, 'ngolo kante', 'Bandung', 778, 22);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `table_makul`
 --
 
 CREATE TABLE `table_makul` (
   `id` int(11) NOT NULL,
-  `makul` varchar(30) DEFAULT NULL
+  `mataKuliah` varchar(30) DEFAULT NULL,
+  `sks` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_makul`
 --
 
-INSERT INTO `table_makul` (`id`, `makul`) VALUES
-(1, 'Pemrograman Web'),
-(3, 'Basis Data 1'),
-(4, 'Basis Data 2');
+INSERT INTO `table_makul` (`id`, `mataKuliah`, `sks`) VALUES
+(1, 'Pemrograman Web 1', 3),
+(3, 'Basis Data 1', 2),
+(4, 'Basis Data 2', 3);
 
 -- --------------------------------------------------------
 
@@ -74,21 +110,22 @@ INSERT INTO `table_profile` (`id`, `namaLengkap`, `alamat`, `umur`, `jk`) VALUES
 CREATE TABLE `table_students` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `address` varchar(50) NOT NULL
+  `address` varchar(50) NOT NULL,
+  `sks` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `table_students`
 --
 
-INSERT INTO `table_students` (`id`, `name`, `address`) VALUES
-(5, 'namej', 'alamatj'),
-(6, 'namaui', 'alamatui'),
-(7, 'namax', 'alamatx'),
-(8, 'namau', 'alamatu'),
-(9, 'namahj', 'alamathj'),
-(10, 'namaa', 'alamata'),
-(11, 'namad', 'alamatd');
+INSERT INTO `table_students` (`id`, `name`, `address`, `sks`) VALUES
+(5, 'namej', 'alamatj', 0),
+(6, 'namaui', 'alamatui', 0),
+(7, 'namax', 'alamatx', 0),
+(8, 'namau', 'alamatu', 0),
+(9, 'namahj', 'alamathj', 0),
+(10, 'namaa', 'alamata', 0),
+(11, 'namad', 'alamatd', 0);
 
 -- --------------------------------------------------------
 
@@ -119,6 +156,18 @@ INSERT INTO `table_user` (`id`, `username`, `password`) VALUES
 --
 
 --
+-- Indexes for table `table_krs`
+--
+ALTER TABLE `table_krs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `table_mahasiswa`
+--
+ALTER TABLE `table_mahasiswa`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `table_makul`
 --
 ALTER TABLE `table_makul`
@@ -145,6 +194,18 @@ ALTER TABLE `table_user`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `table_krs`
+--
+ALTER TABLE `table_krs`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `table_mahasiswa`
+--
+ALTER TABLE `table_mahasiswa`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `table_makul`
