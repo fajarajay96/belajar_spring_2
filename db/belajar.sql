@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2019 at 06:13 AM
+-- Generation Time: Jul 17, 2019 at 09:37 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -34,6 +34,15 @@ CREATE TABLE `table_krs` (
   `id_matakuliah` int(11) NOT NULL,
   `sks` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `table_krs`
+--
+
+INSERT INTO `table_krs` (`id`, `id_mahasiswa`, `id_matakuliah`, `sks`) VALUES
+(28, 2, 1, 1),
+(29, 3, 3, 2),
+(30, 3, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -74,7 +83,7 @@ CREATE TABLE `table_makul` (
 --
 
 INSERT INTO `table_makul` (`id`, `mataKuliah`, `sks`) VALUES
-(1, 'Pemrograman Web 1', 3),
+(1, 'Pemrograman Web 1', 1),
 (3, 'Basis Data 1', 2),
 (4, 'Basis Data 2', 3);
 
@@ -199,7 +208,7 @@ ALTER TABLE `table_user`
 -- AUTO_INCREMENT for table `table_krs`
 --
 ALTER TABLE `table_krs`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `table_mahasiswa`

@@ -50,7 +50,7 @@
                 </div>
             </div>
             <form th:object="${dataSets}" th:action="@{/krs/save}" th:method="post">
-                <input type="text" th:id="id_mahasiswa" name="id_mahasiswa" th:value="*{id}" >
+                <input type="hidden" th:id="id_mahasiswa" name="id_mahasiswa" th:value="*{id}" >
                 <div class="row">
                     <div class="col-md-4"></div>
                     <div class="form-group col-md-4">
@@ -69,17 +69,17 @@
                                 <th>Ambil</th>
                             </tr>
                             <tr th:each="data : ${dataSetsMatakuliah}">
-                                <input type="hidden" th:id="sks" th:name="sks[]" th:value="${data.sks}">
-                                <td th:text="${data.mataKuliah}"></td>
-                                <td th:text="${data.sks}"></td>
-                                <input type="hidden" name="_chk[]" value="on" >
-                                <td><input type="checkbox" name="chk[]" onclick="hitungtotal()">
-                            </tr>
+                            
+                            <td th:text="${data.mataKuliah}"></td>
+                            <td th:text="${data.sks}"></td>
+                            <td><input type="checkbox" name="chk[]" th:checked="${chk}" th:value="${data.id}"></td>
+                            <input type="hidden" th:id="sks" th:name="sks[]" th:value="${data.sks}" th:checked="${chk==1? 'checked':''}">
+                                </tr>
                             <tr><td colspan="3" align="center"><input type="submit" value="Proses" style="cursor:pointer;"></td></tr>
                         </table>
                     </div>
                 </div>
-                
+
             </form>
         </div>
     </body>

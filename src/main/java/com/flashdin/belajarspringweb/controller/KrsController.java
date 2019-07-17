@@ -5,11 +5,11 @@
  */
 package com.flashdin.belajarspringweb.controller;
 
-import com.flashdin.belajarspringweb.dao.KrsDAO;
-import com.flashdin.belajarspringweb.dao.MahasiswaDAO;
-import com.flashdin.belajarspringweb.dao.MataKuliahDAO;
 import com.flashdin.belajarspringweb.entity.Krs;
 import com.flashdin.belajarspringweb.entity.Mahasiswa;
+import com.flashdin.belajarspringweb.service.KrsService;
+import com.flashdin.belajarspringweb.service.MahasiswaService;
+import com.flashdin.belajarspringweb.service.MataKuliahService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,50 +30,50 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class KrsController {
 
     @Autowired
-    private MahasiswaDAO mahasiswaDAO;
+    private MahasiswaService mahasiswaService;
 
     @Autowired
-    private MataKuliahDAO matakuliahDAO;
+    private MataKuliahService matakuliahService;
 
     @Autowired
-    private KrsDAO krsDAO;
+    private KrsService krsService;
+
+    @GetMapping(path = "/view/{id}")
+    public String viewDetail(Model model, @PathVariable(value = "id") int id) {
+        model.addAttribute("dataSetsMahasiswa", mahasiswaService.findById(id));
+        model.addAttribute("dataSetsKrs", krsService.findByName(id));
+        return "/krs/list";
+    }
 
     @GetMapping(path = "/create/{id}")
     public String viewUpdate(Model model, @PathVariable(value = "id") int id) {
-        model.addAttribute("dataSets", mahasiswaDAO.findById(id));
-        model.addAttribute("dataSetsMatakuliah", matakuliahDAO.findAll());
-        return "/mahasiswa/add_krs";
+        boolean myBooleanVariable = false;
+        model.addAttribute("chk", myBooleanVariable);
+        model.addAttribute("dataSets", mahasiswaService.findById(id));
+        model.addAttribute("dataSetsMatakuliah", matakuliahService.findAll());
+        return "/krs/add_krs";
     }
 
     @PostMapping(value = "/save")
-    public String save(@RequestParam(value = "chk[]") Boolean[] chk, @RequestParam(value = "sks[]") String[] sks, @RequestParam(value = "id_mahasiswa") String param) {
+    public String save(@RequestParam(value = "chk[]") String[] chk, @RequestParam(value = "sks[]") String[] sks, @RequestParam(value = "id_mahasiswa") String param) {
 //         System.out.println(param.length);
+        Krs data = new Krs();
         for (int i = 0; i < chk.length; i++) {
-             System.out.println(chk[i]);
-//            Krs krs = new Krs();
-//            krs.setId_matakuliah(Integer.parseInt(chk[i]));
-//            krs.setId_mahasiswa(Integer.parseInt(param));
-//            krs.setSks(Integer.parseInt(sks[i]));
-//            Krs data = krsDAO.save(krs);
+//             System.out.println(sks[2]);
+            Krs krs = new Krs();
+            krs.setId_matakuliah(Integer.parseInt(chk[i]));
+            krs.setId_mahasiswa(Integer.parseInt(param));
+            krs.setSks(Integer.parseInt(sks[i]));
+            data = krsService.save(krs);
         }
-//        Siswa data = siswaDAO.save(krs);
-//        if (data.getId_siswa() == 0) {
-//            return "redirect:/siswa/create?failed";
-//        } else {
-//            return "redirect:/siswa/create?success";
-//        }
-        return null;
+//        return null;
+        if (data.getId_mahasiswa() == 0) {
+            return "redirect:/mahasiswa?failed";
+        } else {
+            return "redirect:/mahasiswa?success";
+        }
     }
 
-//    @PutMapping(path = "/save")
-//    public String update(Siswa param) {
-//        Siswa data = siswaDAO.update(param);
-//        if (data.getId_siswa() == 0) {
-//            return "redirect:/siswa?ufailed";
-//        } else {
-//            return "redirect:/siswa?usuccess";
-//        }
-//    }
 //    @GetMapping(path = "/siswa")
 //    public String viewData(Model model, @RequestParam(value = "search", required = false) String param,
 //            @RequestParam(value = "filter", required = false) String param1) {
