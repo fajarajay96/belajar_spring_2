@@ -46,11 +46,12 @@ public class KrsController {
     }
 
     @GetMapping(path = "/create/{id}")
-    public String viewUpdate(Model model, @PathVariable(value = "id") int id) {
+    public String viewCreate(Model model, @PathVariable(value = "id") int id) {
         boolean myBooleanVariable = false;
         model.addAttribute("chk", myBooleanVariable);
         model.addAttribute("dataSets", mahasiswaService.findById(id));
-        model.addAttribute("dataSetsMatakuliah", matakuliahService.findAll());
+//       model.addAttribute("dataSetsMatakuliah", matakuliahService.findAll());
+        model.addAttribute("dataSetsMatakuliah", matakuliahService.findBymahasiswa(id));
         return "/krs/add_krs";
     }
 
@@ -68,41 +69,47 @@ public class KrsController {
         }
 //        return null;
         if (data.getId_mahasiswa() == 0) {
-            return "redirect:/mahasiswa?failed";
+            return "redirect:/krs/view/" + data.getId_mahasiswa() + "?sfailed";
         } else {
-            return "redirect:/mahasiswa?success";
+            return "redirect:/krs/view/" + data.getId_mahasiswa() + "?ssuccess";
         }
     }
 
-//    @GetMapping(path = "/siswa")
-//    public String viewData(Model model, @RequestParam(value = "search", required = false) String param,
-//            @RequestParam(value = "filter", required = false) String param1) {
-//        if (param == null && param1 == null) {
-//            model.addAttribute("dataSets", siswaDAO.findAll());
-//        } else {
-//            Siswa siswa = new Siswa();
-//            siswa.setNama(param);
-//            model.addAttribute("dataSets", siswaDAO.findBySiswa(siswa));
-//        }
-//        return "/siswa/list";
-//    }
-//
-//    @GetMapping(path = "/siswa/create")
-//    public String viewCreate(Model model) {
-//        model.addAttribute("dataSets", new Siswa());
-//        model.addAttribute("dataSetsJurusan", jurusanDAO.findAll());
-//        model.addAttribute("dataSetsKelas", kelasDAO.findAll());
-//        return "/siswa/create";
-//    }
-//
-//
-//    @DeleteMapping(path = "/siswa/delete")
-//    public String delete(Siswa param) {
-//        int data = siswaDAO.delete(param);
-//        if (data == 0) {
-//            return "redirect:/siswa?dfailed";
-//        } else {
-//            return "redirect:/siswa?dsuccess";
-//        }
-//    }
+    @GetMapping(path = "/viewupdate/{id}")
+    public String viewUpdate(Model model, @PathVariable(value = "id") int id) {
+        boolean myBooleanVariable = false;
+        model.addAttribute("chk", myBooleanVariable);
+        model.addAttribute("dataSets", mahasiswaService.findById(id));
+        model.addAttribute("dataSetsMatakuliah", matakuliahService.findAll());
+        return "/krs/update";
+    }
+
+    @PostMapping(value = "/update")
+    public String update(@RequestParam(value = "chk[]") String[] chk, @RequestParam(value = "sks[]") String[] sks, @RequestParam(value = "id_mahasiswa") String param) {
+//         System.out.println(param.length);
+
+        Krs data = new Krs();
+        data.setId_mahasiswa(Integer.parseInt(param));
+        krsService.delete(data);
+        if (data.getId_mahasiswa()== 0) {
+            return "redirect:/krs/view/" + data.getId_mahasiswa() + "?ufailed";
+        } else {
+            for (int i = 0; i < chk.length; i++) {
+//             System.out.println(sks[2]);
+                Krs krs = new Krs();
+                krs.setId_matakuliah(Integer.parseInt(chk[i]));
+                krs.setId_mahasiswa(Integer.parseInt(param));
+                krs.setSks(Integer.parseInt(sks[i]));
+                data = krsService.update(krs);
+            }
+            if (data.getId_mahasiswa() == 0) {
+                return "redirect:/krs/view/" + data.getId_mahasiswa() + "?ufailed";
+            } else {
+                return "redirect:/krs/view/" + data.getId_mahasiswa() + "?usuccess";
+            }
+        }
+
+//        return null;
+    }
+
 }

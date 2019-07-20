@@ -40,7 +40,7 @@ public class MataKuliahDAOImpl implements MataKuliahDAO{
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, param.getMataKuliah());
-            ps.setInt(1, param.getSks());
+            ps.setInt(2, param.getSks());
             return ps;
         }, keyHolder);
         param.setId(keyHolder.getKey().intValue());
@@ -82,5 +82,11 @@ public class MataKuliahDAOImpl implements MataKuliahDAO{
     public List<MataKuliah> findAll() {
         String sql = "select * from table_makul";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(MataKuliah.class));
+    }
+
+    @Override
+    public List<MataKuliah> findBymahasiswa(int id) {
+        String sql = "select * from table_makul where table_makul.id not in (select table_krs.id_matakuliah from table_krs where table_krs.id_mahasiswa=?)";
+        return jdbcTemplate.query(sql, new Object[]{id}, new BeanPropertyRowMapper<>(MataKuliah.class));
     }
 }

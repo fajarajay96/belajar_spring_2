@@ -35,13 +35,13 @@ public class KrsServiceImpl implements KrsService{
     }
 
     @Override
-    public Krs update(Krs param) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Krs update(@RequestBody Krs param) {
+        return krsDAO.update(param);
     }
 
     @Override
-    public int delete(Krs param) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int delete(@RequestBody Krs param) {
+        return krsDAO.delete(param);
     }
 
     @Override

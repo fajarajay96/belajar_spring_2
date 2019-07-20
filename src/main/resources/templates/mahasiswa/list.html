@@ -178,6 +178,18 @@
     </div>
 </nav>
 <div class="container">
+    <div th:if="${param.krsufailed}" class="alert alert-warning" role="alert">
+        <strong>NOTIFIKASI : </strong> Gagal Update KRS pada mahasiswa
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div th:if="${param.krsusuccess}" class="alert alert-success" role="alert">
+        <strong>NOTIFIKASI : </strong> Berhasil Update KRS pada mahasiswa
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
     <div th:if="${param.failed}" class="alert alert-warning" role="alert">
         <strong>NOTIFIKASI : </strong> Gagal tambah KRS pada mahasiswa
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
