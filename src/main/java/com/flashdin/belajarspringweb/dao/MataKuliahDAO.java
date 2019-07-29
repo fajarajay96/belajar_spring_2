@@ -15,4 +15,5 @@ import java.util.List;
 public interface MataKuliahDAO extends BaseDAO<MataKuliah>{
     List<MataKuliah> findByName(MataKuliah param);
     List<MataKuliah> findBymahasiswa(int id);
+    List<MataKuliah> findByMahasiswa2(int id);
 }

@@ -21,7 +21,15 @@ public class Krs {
     private String matakuliah;
     private int sks;
     private Mahasiswa mahasiswa;
+    private String[] chk;
 
+    public String[] getChk() {
+        return chk;
+    }
+
+    public void setChk(String[] chk) {
+        this.chk = chk;
+    }
     
     public Mahasiswa getMahasiswa() {
         return mahasiswa;

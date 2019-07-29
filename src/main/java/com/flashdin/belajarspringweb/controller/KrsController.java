@@ -56,18 +56,14 @@ public class KrsController {
     }
 
     @PostMapping(value = "/save")
-    public String save(@RequestParam(value = "chk[]") String[] chk, @RequestParam(value = "sks[]") String[] sks, @RequestParam(value = "id_mahasiswa") String param) {
-//         System.out.println(param.length);
+    public String save(@RequestParam(value = "chk[]") String[] chk, @RequestParam(value = "id_mahasiswa") String param) {
         Krs data = new Krs();
         for (int i = 0; i < chk.length; i++) {
-//             System.out.println(sks[2]);
             Krs krs = new Krs();
             krs.setId_matakuliah(Integer.parseInt(chk[i]));
             krs.setId_mahasiswa(Integer.parseInt(param));
-            krs.setSks(Integer.parseInt(sks[i]));
             data = krsService.save(krs);
         }
-//        return null;
         if (data.getId_mahasiswa() == 0) {
             return "redirect:/krs/view/" + data.getId_mahasiswa() + "?sfailed";
         } else {
@@ -86,8 +82,6 @@ public class KrsController {
 
     @PostMapping(value = "/update")
     public String update(@RequestParam(value = "chk[]") String[] chk, @RequestParam(value = "sks[]") String[] sks, @RequestParam(value = "id_mahasiswa") String param) {
-//         System.out.println(param.length);
-
         Krs data = new Krs();
         data.setId_mahasiswa(Integer.parseInt(param));
         krsService.delete(data);
@@ -95,7 +89,6 @@ public class KrsController {
             return "redirect:/krs/view/" + data.getId_mahasiswa() + "?ufailed";
         } else {
             for (int i = 0; i < chk.length; i++) {
-//             System.out.println(sks[2]);
                 Krs krs = new Krs();
                 krs.setId_matakuliah(Integer.parseInt(chk[i]));
                 krs.setId_mahasiswa(Integer.parseInt(param));
@@ -109,7 +102,6 @@ public class KrsController {
             }
         }
 
-//        return null;
     }
 
 }

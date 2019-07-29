@@ -7,5 +7,5 @@ import java.util.List;
 public interface UserSevice extends BaseService<User> {
 
     List<User> findByUsername(User param);
-
+     List<User> login(User param);
 }

@@ -173,8 +173,7 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <ul class="nav navbar-nav">
-            <li><a th:href="@{/}">Home</a></li>
-            <li class="active"><a th:href="@{/mataKuliah}">Mata Kuliah</a></li>
+            <li><a th:href="@{/home}">Home</a></li>
         </ul>
     </div>
 </nav>
@@ -275,6 +274,8 @@
                                th:data-value="${data.id}"
                                data-toggle="modal"
                                data-target="#myModal"><i class="fa fa-trash"></i></a>
+                            <a th:href="${'mataKuliah/viewMahasiswa/' + data.id}" class="btn btn-warning"><i
+                                    class="fa fa-list"></i></a>   
                         </td>
                     </tr>
                     </tbody>

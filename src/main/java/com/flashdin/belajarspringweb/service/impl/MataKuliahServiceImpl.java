@@ -58,5 +58,11 @@ public class MataKuliahServiceImpl implements MataKuliahService{
     public List<MataKuliah> findBymahasiswa(@PathVariable int id) {
         return mataKuliahDAO.findBymahasiswa(id);
     }
+
+    @Override
+    public List<MataKuliah> findByMahasiswa2(int id) {
+        return mataKuliahDAO.findByMahasiswa2(id);
+    }
+
     
 }

@@ -42,6 +42,13 @@ public class MataKuliahController {
         return "/mataKuliah/list";
     }
     
+    @GetMapping(path = "/viewMahasiswa/{id}")
+    public String viewMahasiswa(Model model, @PathVariable(value = "id") int id) {
+        model.addAttribute("dataSetsMatakuliah", mataKuliahService.findById(id));
+        model.addAttribute("dataSetsMahasiswa", mataKuliahService.findByMahasiswa2(id));
+        return "/mataKuliah/listMahasiswa";
+    }
+    
     @GetMapping(path = "/create")
     public String viewCreate(Model model) {
         model.addAttribute("dataSets", new MataKuliah());

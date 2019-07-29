@@ -89,4 +89,16 @@ public class MataKuliahDAOImpl implements MataKuliahDAO{
         String sql = "select * from table_makul where table_makul.id not in (select table_krs.id_matakuliah from table_krs where table_krs.id_mahasiswa=?)";
         return jdbcTemplate.query(sql, new Object[]{id}, new BeanPropertyRowMapper<>(MataKuliah.class));
     }
+
+    @Override
+    public List<MataKuliah> findByMahasiswa2(int id) {
+        String sql = "SELECT table_mahasiswa.id, table_mahasiswa.nama, table_mahasiswa.alamat, table_mahasiswa.sks "
+                + "from table_mahasiswa "
+                + "join table_krs on table_krs.id_mahasiswa=table_mahasiswa.id "
+                + "join table_makul on table_krs.id_matakuliah=table_makul.id "
+                + "where table_krs.id_matakuliah=?";
+        return jdbcTemplate.query(sql, new Object[]{id}, new BeanPropertyRowMapper<>(MataKuliah.class));
+    }
+    
+    
 }

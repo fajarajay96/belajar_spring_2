@@ -75,4 +75,10 @@ public class UserDAOImpl implements UserDAO {
         String sql = "select * from table_user where username like ?";
         return jdbcTemplate.query(sql, new Object[]{"%" + param.getUsername() + "%"}, new BeanPropertyRowMapper<>(User.class));
     }
+
+    @Override
+    public List<User> login(User param) {
+        String sql = "select * from table_user where username=? and password=?";
+        return jdbcTemplate.query(sql, new Object[]{param.getUsername(),param.getPassword()}, new BeanPropertyRowMapper<>(User.class));
+    }
 }

@@ -7,5 +7,5 @@ import java.util.List;
 public interface UserDAO extends BaseDAO<User> {
 
     List<User> findByUsername(User param);
-
+     List<User> login(User param);
 }
