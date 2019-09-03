@@ -3,14 +3,14 @@ package com.flashdin.belajarspringweb.service.impl;
 import com.flashdin.belajarspringweb.dao.UserDAO;
 import com.flashdin.belajarspringweb.dao.impl.UserDAOImpl;
 import com.flashdin.belajarspringweb.entity.User;
-import com.flashdin.belajarspringweb.service.UserSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import com.flashdin.belajarspringweb.service.UserService;
 
 @Service
-public class UserServiceImpl implements UserSevice {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDAO userDAO;
@@ -48,5 +48,15 @@ public class UserServiceImpl implements UserSevice {
     @Override
     public List<User> login(User param) {
         return userDAO.login(param);
+    }
+
+    @Override
+    public List<User> findByUsernameAndPassword(User param) {
+        return userDAO.findByUsernameAndPassword(param);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userDAO.findByUsername(username);
     }
 }
